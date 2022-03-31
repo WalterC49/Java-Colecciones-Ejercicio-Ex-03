@@ -79,6 +79,7 @@ public class Ejercicio_Ex_03 {
         }while(continuar==true);
         System.out.println("-------------------------------------------------");
         int op;
+        String buscar;
         do{
             System.out.println("\nMENÚ"
                     + "\n1- Prestar libro."
@@ -87,20 +88,44 @@ public class Ejercicio_Ex_03 {
                     + "\n4- Salir del programa.");
             System.out.print("Opción: ");
             op=Libro.leer.nextInt();
+            Libro.leer.nextLine();
+            boolean encontrado=false;
             switch(op){
                 case 1:
+                    System.out.print("\nIngrese el titulo del libro que quiere prestar: ");
+                    buscar=Libro.leer.nextLine();
+                    for (Libro i : Libros) {
+                        if(i.getTitulo().equals(buscar)){
+                            encontrado=true;
+                            System.out.println((Libro.Prestamo(i))?"El libro se prestó":"No hay ejemplares para prestar.");
+                        }
+                    }
+                    if(!encontrado){
+                        System.out.println("Ese libro no existe.");
+                    }
                     break;
                 case 2:
+                    System.out.print("\nIngrese el titulo del libro que quiere devolver: ");
+                    buscar=Libro.leer.nextLine();
+                    for (Libro i : Libros) {
+                        if(i.getTitulo().equals(buscar)){
+                            encontrado=true;
+                            System.out.println((Libro.Devolucion(i))?"El libro se devolvió":"Ese libro no fue prestadó.");
+                        }
+                    }if(!encontrado){
+                        System.out.println("Ese libro no existe.");
+                    }
                     break;
                 case 3:
+                    Libro.MostrarLibros(Libros);
                     break;
                 case 4:
+                    System.out.println("Hasta luego.");
                     break;
                 default:
                     System.out.println("Opción no valida.");
             }
         }while(op!=4);
-        
     }
     
 }

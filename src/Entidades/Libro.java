@@ -5,6 +5,7 @@
  */
 package Entidades;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -68,7 +69,30 @@ public class Libro {
     
     public static Scanner leer = new Scanner(System.in);
     
+    public static boolean Prestamo(Libro libro){
+        if(libro.getNumEjem()>0){
+            libro.setNumEjemPrest(libro.getNumEjemPrest()+1);
+            libro.setNumEjem(libro.getNumEjem()-1);
+            return true;
+        }else{
+            return false;
+        }
+    }
     
+    public static boolean Devolucion(Libro libro){
+        if(libro.getNumEjemPrest()>0){
+            libro.setNumEjem(libro.getNumEjem()+1);
+            libro.setNumEjemPrest(libro.getNumEjemPrest()-1);
+            return true;
+        }else{
+            return false;
+        }
+    }
     
-    
+    public static void MostrarLibros(HashSet<Libro> Libros){
+        System.out.println("\nLibros:");
+        for (Libro i : Libros) {
+            System.out.println(i);
+        }
+    }
 }
